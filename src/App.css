@@ -129,8 +129,9 @@ h3 {
 
 .news-heading {
   text-align: left;
-  min-height: 12rem;
-  max-height: 12rem;
+  min-height: 11.5rem;
+  max-height: 11.5rem;
+  padding: 0;
   overflow: hidden;
 }
 
