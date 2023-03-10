@@ -18,6 +18,7 @@ class News extends Component {
     this.setState({
       articles: mainData.articles,
     });
+    console.log(this.state);
   }
 
   render() {

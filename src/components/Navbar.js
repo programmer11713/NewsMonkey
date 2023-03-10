@@ -4,7 +4,7 @@ export default function Navbar() {
       <ul className="horizontal-list">
         <div className="container">
           <li className="nav__heading">
-            <a href='/'><h2>NewsMan</h2></a>
+            <a href='/'><h2>NewsMonkey</h2></a>
           </li>
         </div>
         <div className="container">

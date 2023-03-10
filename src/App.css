@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 html {
@@ -13,6 +13,7 @@ html {
 
 body {
   font-size: 2rem;
+  min-height: 100vh;
 }
 
 img::selection {
@@ -42,6 +43,11 @@ h3 {
   --color-primary: #1e3d59;
   --color-secondary: #f5f0e1;
   --color-accent: #ffc13b;
+}
+
+.whole-container {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Navbar */
@@ -82,7 +88,7 @@ h3 {
 }
 
 .horizontal-list .list__item a::after {
-  content: '';
+  content: "";
   height: 4px;
   width: 0;
   background: var(--color-accent);
@@ -172,4 +178,28 @@ h3 {
   margin-top: 4rem;
   color: var(--color-primary);
   margin-bottom: 5rem;
+}
+
+/* Footer */
+footer {
+  background: var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+
+footer a:hover {
+  color: var(--color-secondary);
+}
+
+.footer-logo a {
+  font-size: 3rem;
+  font-weight: bold;
 }
