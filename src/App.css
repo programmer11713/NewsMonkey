@@ -128,13 +128,21 @@ h3 {
 }
 
 .news-heading {
-  margin-bottom: 2.5rem;
   text-align: left;
+  min-height: 12rem;
+  max-height: 12rem;
+  overflow: hidden;
 }
 
 .news-description {
-  margin-bottom: 3rem;
   text-align: left;
+  min-height: 12rem;
+  max-height: 12rem;
+  overflow: hidden;
+}
+
+#news-item-button {
+  margin-bottom: 1.5rem;
 }
 
 .btn {
@@ -201,5 +209,20 @@ footer a:hover {
 
 .footer-logo a {
   font-size: 3rem;
+  font-weight: bold;
+}
+
+/* Pagination Button */
+.pagination-button {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-button button {
+  margin: 2rem;
+}
+
+.page {
+  font-size: 2rem;
   font-weight: bold;
 }

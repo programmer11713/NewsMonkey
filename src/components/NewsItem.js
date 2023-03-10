@@ -5,7 +5,7 @@ export default function NewsItem(props) {
       <img
         src={
           !urlToImage
-            ? "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg?ver=6"
+            ? "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg"
             : urlToImage
         }
         alt={sourceID}
@@ -14,7 +14,7 @@ export default function NewsItem(props) {
         <h3 className="news-heading">{title}...</h3>
         <p className="news-description">{description}...</p>
         <a href={url} target="_blank" rel="noreferrer">
-          <button class="btn btn-primary">Read More...</button>
+          <button class="btn btn-primary" id="news-item-button">Read More...</button>
         </a>
       </div>
     </div>
