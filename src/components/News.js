@@ -11,12 +11,13 @@ class News extends Component {
       curPage: 1,
       totalResults: 0,
       loading: true,
+      pageSize: 18,
     };
   }
 
   async componentDidMount() {
-    let { curPage } = this.state;
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${curPage}`;
+    let { curPage, pageSize } = this.state;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=${pageSize}&page=${curPage}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
@@ -39,7 +40,7 @@ class News extends Component {
   };
 
   handleNextPage = async () => {
-    if (this.state.curPage < Math.ceil(this.state.totalResults / 20)) {
+    if (this.state.curPage < Math.ceil(this.state.totalResults / 18)) {
       this.setState({
         curPage: this.state.curPage + 1,
         loading: true
@@ -58,7 +59,7 @@ class News extends Component {
       color: "white",
       cursor: "not-allowed",
     };
-    let totalResultLogic = Math.ceil(totalResults / 20);
+    let totalResultLogic = Math.ceil(totalResults / 18);
 
     return (
       <>

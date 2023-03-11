@@ -5,7 +5,7 @@ export default function NewsItem(props) {
       <img
         src={
           !urlToImage
-            ? "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg"
+            ? "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
             : urlToImage
         }
         alt={sourceID}
