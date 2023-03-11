@@ -13,8 +13,9 @@ class News extends Component {
   }
   
   async componentDidMount() {
+    let {curPage} = this.state;
     let url =
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${this.state.curPage}`;
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${curPage}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
@@ -24,27 +25,25 @@ class News extends Component {
   }
 
   handlePrevPage = async () => {
-    if (this.state.curPage != 1) {
-      let url =
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${this.state.curPage-1}`;
-      let data = await fetch(url);
-      let mainData = await data.json();
-      this.setState({
-        curPage: this.state.curPage - 1,
-        articles: mainData.articles,
+    if (this.state.curPage !== 1) {
+      this.setState(prevState => {
+        return {
+          curPage: prevState.curPage-1
+        }
+      }, () => {
+        this.componentDidMount();
       });
     }
   }
   
   handleNextPage = async () => {
     if(this.state.curPage < Math.ceil(this.state.totalResults/20)) {
-      let url =
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${this.state.curPage+1}`;
-      let data = await fetch(url);
-      let mainData = await data.json();
-      this.setState({
-        curPage: this.state.curPage + 1,
-        articles: mainData.articles,
+      this.setState(prevState => {
+        return {
+          curPage: prevState.curPage+1
+        }
+      }, () => {
+        this.componentDidMount();
       });
     }
   }
