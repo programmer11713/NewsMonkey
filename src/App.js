@@ -15,12 +15,12 @@ function App() {
       <div className="whole-container">
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<News key="general" category='general' heading="Today's Top News"/>}></Route>
+          <Route exact path="/" element={<News key="general" category='general' heading="Top News"/>}></Route>
           <Route exact path="/sports" element={<News key="sports" category="sports" heading="Top Sports News"/>}></Route>
           <Route exact path="/politics" element={<News key="politics" category="politics" heading="Realted to Politics"/>}></Route>
           <Route exact path="/technology" element={<News key="technology" category="technology" heading="Technology Section"/>}></Route>
           <Route exact path="/business" element={<News key="business" category="business" heading="The Business News"/>}></Route>
-          <Route exact path="*" element={<NotFound />}></Route>
+          <Route exact path="*" element={<NotFound/>}></Route>
         </Routes>
         <Footer />
       </div>  

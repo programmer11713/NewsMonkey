@@ -12,12 +12,13 @@ class News extends Component {
       totalResults: 0,
       loading: true,
       pageSize: 12,
+      country: 'in',
     };
   }
 
   async componentDidMount() {
-    let { curPage, pageSize } = this.state;
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=${pageSize}&page=${curPage}&category=${this.props.category}`;
+    let { curPage, pageSize, country } = this.state;
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=47f0f86a9b36401a892a186bad6bea42&pageSize=${pageSize}&page=${curPage}&category=${this.props.category}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
@@ -25,7 +26,6 @@ class News extends Component {
       totalResults: mainData.totalResults,
       loading: false
     });
-    console.log(url);
   }
   
   handlePrevPage = async () => {
@@ -41,7 +41,6 @@ class News extends Component {
   };
 
   handleNextPage = async () => {
-    console.log(this.state.totalResults);
     if (this.state.curPage < Math.ceil(this.state.totalResults / this.state.pageSize)) {
       this.setState({
         curPage: this.state.curPage + 1,
@@ -82,6 +81,7 @@ class News extends Component {
                   url={article.url}
                   sourceID={article.source.id}
                   key={article.urlToImage}
+                  date={article.publishedAt}
                 />
               );
             })}

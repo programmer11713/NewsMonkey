@@ -140,10 +140,14 @@ h3 {
 
 .news-description {
   text-align: left;
-  min-height: 12rem;
-  max-height: 12rem;
+  min-height: 10rem;
+  max-height: 10rem;
   overflow: hidden;
   padding-top: 0.5rem;
+}
+
+.news-published {
+  margin-bottom: 3rem;
 }
 
 #news-item-button {
