@@ -1,13 +1,14 @@
 export default function NewsItem(props) {
-  let { title, description, url, urlToImage, sourceID, date } = props;
+  let { title, description, url, urlToImage, sourceID, date, by } = props;
   let convertedDate = new Date(date);
   return (
     <div className="news-item">
+      <span class="source-name">{by}</span>
       <img
         src={
-          !urlToImage
-            ? "https://images.pexels.com/photos/327533/pexels-photo-327533.jpeg"
-            : urlToImage
+          urlToImage
+            ? urlToImage
+            : "https://images.pexels.com/photos/327533/pexels-photo-327533.jpeg"
         }
         alt={sourceID}
       />

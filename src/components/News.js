@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Loading from "./Loading";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 class News extends Component {
   constructor() {
@@ -10,7 +11,6 @@ class News extends Component {
       articles: [],
       curPage: 1,
       totalResults: 0,
-      loading: true,
       pageSize: 12,
       country: 'in',
     };
@@ -22,53 +22,38 @@ class News extends Component {
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
-      articles: mainData.articles,
-      totalResults: mainData.totalResults,
-      loading: false
+      articles: this.state.articles.concat(mainData.articles),
+      totalResults: mainData.totalResults
     });
   }
-  
-  handlePrevPage = async () => {
-    if (this.state.curPage !== 1) {
-      this.setState({
-        curPage: this.state.curPage - 1,
-        loading: true
-      }, () => {
-        window.scrollTo(0, 0);
-        this.componentDidMount();
-      });
-    }
-  };
 
-  handleNextPage = async () => {
-    if (this.state.curPage < Math.ceil(this.state.totalResults / this.state.pageSize)) {
-      this.setState({
-        curPage: this.state.curPage + 1,
-        loading: true
-      }, () => {
-        window.scrollTo(0, 0);
-        this.componentDidMount();
-      })
-    }
-  };
+  handleCaptializeChar = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  fetchMoreData = () => {
+    this.setState({
+      curPage: this.state.curPage + 1,
+    }, () => {
+      this.componentDidMount()
+    });
+  }
 
   render() {
-    let { articles, totalResults, curPage, loading } = this.state;
-    let disabledStyle = {
-      backgroundColor: "gray",
-      border: 0,
-      color: "white",
-      cursor: "not-allowed",
-    };
-    let totalResultLogic = Math.ceil(totalResults / this.state.pageSize);
-
+    let titleCategory = this.handleCaptializeChar(this.props.category);
+    document.title = titleCategory + ' - News Monkey';
     return (
       <>
         <div className="news-container">
           <h1>{this.props.heading}...</h1>
-          {loading?<Loading/>:null}
+          <InfiniteScroll
+            dataLength={this.state.articles.length}
+            next={this.fetchMoreData}
+            hasMore={this.state.articles.length <= this.state.totalResults}
+            loader={<Loading/>}
+          >
           <div className="news-item-container">
-            {articles.map((article) => {
+            {this.state.articles.map((article, index) => {
               return (
                 <NewsItem
                   title={article.title.slice(0, 50)}
@@ -80,32 +65,14 @@ class News extends Component {
                   urlToImage={article.urlToImage}
                   url={article.url}
                   sourceID={article.source.id}
-                  key={article.urlToImage}
+                  key={index}
                   date={article.publishedAt}
+                  by={article.source.name}
                 />
               );
             })}
-          </div>
-
-          <div className="pagination-button">
-            <button
-              class="btn btn-primary"
-              style={curPage === 1 ? disabledStyle : null}
-              onClick={this.handlePrevPage}
-            >
-              Prev
-            </button>
-            <div className="page">
-              Page {curPage} of {totalResultLogic}
             </div>
-            <button
-              class="btn btn-primary"
-              onClick={this.handleNextPage}
-              style={curPage === totalResultLogic ? disabledStyle : null}
-            >
-              Next
-            </button>
-          </div>
+          </InfiniteScroll>
         </div>
       </>
     );
