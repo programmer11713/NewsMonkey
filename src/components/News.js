@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import Loading from "./Loading";
 
 class News extends Component {
   constructor() {
@@ -9,6 +10,7 @@ class News extends Component {
       articles: [],
       curPage: 1,
       totalResults: 0,
+      loading: true,
     };
   }
 
@@ -20,43 +22,36 @@ class News extends Component {
     this.setState({
       articles: mainData.articles,
       totalResults: mainData.totalResults,
+      loading: false
     });
   }
 
   handlePrevPage = async () => {
     if (this.state.curPage !== 1) {
-      this.setState(
-        (prevState) => {
-          return {
-            curPage: prevState.curPage - 1,
-          };
-        },
-        () => {
-          window.scrollTo(0, 0);
-          this.componentDidMount();
-        }
-      );
+      this.setState({
+        curPage: this.state.curPage - 1,
+        loading: true
+      }, () => {
+        window.scrollTo(0, 0);
+        this.componentDidMount();
+      });
     }
   };
 
   handleNextPage = async () => {
     if (this.state.curPage < Math.ceil(this.state.totalResults / 20)) {
-      this.setState(
-        (prevState) => {
-          return {
-            curPage: prevState.curPage + 1,
-          };
-        },
-        () => {
-          window.scrollTo(0, 0);
-          this.componentDidMount();
-        }
-      );
+      this.setState({
+        curPage: this.state.curPage + 1,
+        loading: true
+      }, () => {
+        window.scrollTo(0, 0);
+        this.componentDidMount();
+      })
     }
   };
 
   render() {
-    let { articles, totalResults, curPage } = this.state;
+    let { articles, totalResults, curPage, loading } = this.state;
     let disabledStyle = {
       backgroundColor: "gray",
       border: 0,
@@ -69,6 +64,7 @@ class News extends Component {
       <>
         <div className="news-container">
           <h1>Today's Top Headlines...</h1>
+          {loading?<Loading/>:null}
           <div className="news-item-container">
             {articles.map((article) => {
               return (
