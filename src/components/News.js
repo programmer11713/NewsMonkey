@@ -11,51 +11,59 @@ class News extends Component {
       totalResults: 0,
     };
   }
-  
+
   async componentDidMount() {
-    let {curPage} = this.state;
-    let url =
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${curPage}`;
+    let { curPage } = this.state;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=20&page=${curPage}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
       articles: mainData.articles,
-      totalResults: mainData.totalResults
+      totalResults: mainData.totalResults,
     });
   }
 
   handlePrevPage = async () => {
     if (this.state.curPage !== 1) {
-      this.setState(prevState => {
-        return {
-          curPage: prevState.curPage-1
+      this.setState(
+        (prevState) => {
+          return {
+            curPage: prevState.curPage - 1,
+          };
+        },
+        () => {
+          window.scrollTo(0, 0);
+          this.componentDidMount();
         }
-      }, () => {
-        this.componentDidMount();
-      });
+      );
     }
-  }
-  
+  };
+
   handleNextPage = async () => {
-    if(this.state.curPage < Math.ceil(this.state.totalResults/20)) {
-      this.setState(prevState => {
-        return {
-          curPage: prevState.curPage+1
+    if (this.state.curPage < Math.ceil(this.state.totalResults / 20)) {
+      this.setState(
+        (prevState) => {
+          return {
+            curPage: prevState.curPage + 1,
+          };
+        },
+        () => {
+          window.scrollTo(0, 0);
+          this.componentDidMount();
         }
-      }, () => {
-        this.componentDidMount();
-      });
+      );
     }
-  }
+  };
 
   render() {
-    let { articles, totalResults } = this.state;
+    let { articles, totalResults, curPage } = this.state;
     let disabledStyle = {
-      backgroundColor: 'gray',
+      backgroundColor: "gray",
       border: 0,
-      color: 'white',
-      cursor: 'not-allowed'
-    }
+      color: "white",
+      cursor: "not-allowed",
+    };
+    let totalResultLogic = Math.ceil(totalResults / 20);
 
     return (
       <>
@@ -81,11 +89,23 @@ class News extends Component {
           </div>
 
           <div className="pagination-button">
-            <button class="btn btn-primary" style={this.state.curPage===1?disabledStyle:null} onClick={this.handlePrevPage} >Prev</button>
+            <button
+              class="btn btn-primary"
+              style={curPage === 1 ? disabledStyle : null}
+              onClick={this.handlePrevPage}
+            >
+              Prev
+            </button>
             <div className="page">
-              Page {this.state.curPage} of {Math.ceil(this.state.totalResults / 20)}
+              Page {curPage} of {totalResultLogic}
             </div>
-            <button class="btn btn-primary" onClick={this.handleNextPage} style={this.state.curPage===Math.ceil(totalResults/20)?disabledStyle:null}>Next</button>
+            <button
+              class="btn btn-primary"
+              onClick={this.handleNextPage}
+              style={curPage === totalResultLogic ? disabledStyle : null}
+            >
+              Next
+            </button>
           </div>
         </div>
       </>

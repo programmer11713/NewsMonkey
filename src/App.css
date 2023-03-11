@@ -219,6 +219,11 @@ footer a:hover {
   align-items: center;
 }
 
+.pagination-button a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .pagination-button button {
   margin: 2rem;
 }
