@@ -11,13 +11,13 @@ class News extends Component {
       curPage: 1,
       totalResults: 0,
       loading: true,
-      pageSize: 18,
+      pageSize: 12,
     };
   }
 
   async componentDidMount() {
     let { curPage, pageSize } = this.state;
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=${pageSize}&page=${curPage}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=3fe7795c9cb44e92a502b51d276cbd7c&pageSize=${pageSize}&page=${curPage}&category=${this.props.category}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
@@ -25,8 +25,9 @@ class News extends Component {
       totalResults: mainData.totalResults,
       loading: false
     });
+    console.log(url);
   }
-
+  
   handlePrevPage = async () => {
     if (this.state.curPage !== 1) {
       this.setState({
@@ -40,7 +41,8 @@ class News extends Component {
   };
 
   handleNextPage = async () => {
-    if (this.state.curPage < Math.ceil(this.state.totalResults / 18)) {
+    console.log(this.state.totalResults);
+    if (this.state.curPage < Math.ceil(this.state.totalResults / this.state.pageSize)) {
       this.setState({
         curPage: this.state.curPage + 1,
         loading: true
@@ -59,12 +61,12 @@ class News extends Component {
       color: "white",
       cursor: "not-allowed",
     };
-    let totalResultLogic = Math.ceil(totalResults / 18);
+    let totalResultLogic = Math.ceil(totalResults / this.state.pageSize);
 
     return (
       <>
         <div className="news-container">
-          <h1>Today's Top Headlines...</h1>
+          <h1>{this.props.heading}...</h1>
           {loading?<Loading/>:null}
           <div className="news-item-container">
             {articles.map((article) => {
