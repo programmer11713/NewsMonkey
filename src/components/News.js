@@ -17,14 +17,16 @@ class News extends Component {
   }
 
   async componentDidMount() {
+    this.props.setProgress(25);
     let { curPage, pageSize, country } = this.state;
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=47f0f86a9b36401a892a186bad6bea42&pageSize=${pageSize}&page=${curPage}&category=${this.props.category}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=0b3e173754f848b690c441225e140e9d&pageSize=${pageSize}&page=${curPage}&category=${this.props.category}`;
     let data = await fetch(url);
     let mainData = await data.json();
     this.setState({
       articles: this.state.articles.concat(mainData.articles),
       totalResults: mainData.totalResults
     });
+    this.props.setProgress(100);
   }
 
   handleCaptializeChar = (string) => {
@@ -35,7 +37,7 @@ class News extends Component {
     this.setState({
       curPage: this.state.curPage + 1,
     }, () => {
-      this.componentDidMount()
+      this.componentDidMount();
     });
   }
 
