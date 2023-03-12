@@ -14,7 +14,7 @@ The application is built with a responsive design, making it easy to use on any 
 ## Lacking
 - This project is not having Responsive Design, as News API's developer version is being used. The paid one is 40K+ and currently I cannot purchase it
 - In developer version of News API, the news are not fetched by the App, if the APP is hosted on anything except localhost 
-- Due to this, I dropped the idea of making 
+- Due to this, I dropped the idea of adding Responsiveness to this App 
 
 ## How to Use
 - Clone the repository to your local machine.
