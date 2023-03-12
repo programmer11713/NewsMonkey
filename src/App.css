@@ -107,6 +107,24 @@ h3 {
   width: 100%;
 }
 
+.top-nav i {
+  height: 0;
+  overflow: hidden;
+  color: var(--color-secondary);
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .top-nav i {
+    height: 100%;
+  }
+
+  .top-nav .container:nth-child(2) li {
+    display: none;
+  }
+}
+
 /* News Item */
 .news-item {
   width: 38rem;

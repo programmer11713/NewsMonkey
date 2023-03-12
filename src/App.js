@@ -22,6 +22,7 @@ const App = () => {
           <Route exact path="/politics" element={<News key="politics"  apiKey={apiKey}category="politics" heading="Realted to Politics"/>}></Route>
           <Route exact path="/technology" element={<News key="technology" apiKey={apiKey} category="technology" heading="Technology Section"/>}></Route>
           <Route exact path="/business" element={<News key="business" apiKey={apiKey} category="business" heading="The Business News"/>}></Route>
+          <Route exact path="/entertainment" element={<News key="entertainment" apiKey={apiKey} category="entertainment" heading="Entertainment"/>}></Route>
           <Route exact path="*" element={<NotFound/>}></Route>
         </Routes>
         <Footer />

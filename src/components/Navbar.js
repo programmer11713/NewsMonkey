@@ -10,6 +10,7 @@ export default function Navbar() {
           </li>
         </div>
         <div className="container">
+        <i class="fa-solid fa-plus"></i>
           <li className="list__item">
             <Link to='/'>General</Link>
           </li>
@@ -24,6 +25,9 @@ export default function Navbar() {
           </li>
           <li className="list__item">
             <Link to='/business'>Business</Link>
+          </li>
+          <li className="list__item">
+            <Link to='/entertainment'>Entertainment</Link>
           </li>
         </div>
       </ul>
