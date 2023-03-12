@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className='top-nav' onClick={addMobileList}>
+    <nav className='top-nav'>
       <ul className="horizontal-list">
         <div className="container">
           <li className="nav__heading">
