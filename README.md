@@ -3,7 +3,7 @@ News Monkey is a React application that allows users to fetch the latest news fr
 
 Users can browse news articles by category, including sports, politics, entertainment, technology, and more. The application also provides a search functionality that allows users to search for news articles based on keywords.
 
-The application is built with a responsive design, making it easy to use on any device. The codebase is well-organized and easy to understand, making it easy for developers to modify or extend the application.
+The codebase is well-organized and easy to understand, making it easy for developers to modify or extend the application.
 
 ## Features
 - Fetch latest news from various sources using the NEWS API.
